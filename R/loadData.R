@@ -2,8 +2,25 @@
 # and manipulate the data into individual features
 
 init <- function() {
+  require('dplyr')
   # This function loads the data from the csv file.
-  twitter.isis <<- read.csv('./data/tweets.csv')
-  parseURL(twitter.isis)
+  twitter.isis <- read.csv('./data/tweets.csv')
+
+  #Too intensive, commenting out
+  training_data <<- sapply(twitter.isis$tweets, grepURL)
+  training_data[[1]]
+
+
 }
-init()
+grepURL <- function(string) {
+  require('stringr')
+
+  return(str_match(string, 'https?://t.co/[a-zA-Z0-9/-/.]\\S+'))
+
+  #value <- grep(, string, value = TRUE)
+
+}
+regexURL <- function(string) {
+  sub("https?://t.co/[a-zA-Z0-9/-/.]{1-10}\\S+", 'hello', string)
+}
+
