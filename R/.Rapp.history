@@ -1,0 +1,4 @@
+load("/Users/jeffreychang/Projects/R/ISISTwitter/R/s1.RData")
+data <- load("/Users/jeffreychang/Projects/R/ISISTwitter/R/s1.RData")
+data
+s1

@@ -1,15 +1,28 @@
-parseURL <- function(twitter.text) {
+unexpandURL <- function(twitter.text) {
   require('httr')
   api_key <- 'f5GJD0bch0Gna3xpEKvVKcDzW04rDUBM'
   api_endpoint <- 'http://api.unshorten.it?shortURL='
-  sample_link <- 'http://t.co/uqqzXGgVTz'
-
-
-  link <- paste0(api_endpoint, sample_link,'&apiKey=', api_key)
+  link <- paste0(api_endpoint, twitter.text,'&apiKey=', api_key)
   response <- GET(link)
-  return(content(response, encoding = "UTF-8"))
+  if (is.na(twitter.text)) {
+    return("false")
+  } else {
+    url <- content(response, encoding = "UTF-8")
+    return(url)
+  }
 
 }
+grepURL <- function(string) {
+  require('stringr')
+  return(str_match(string, 'https?://t.co/[a-zA-Z0-9/-/.]\\S+'))
+
+  #value <- grep(, string, value = TRUE)
+
+}
+removeURL <- function(string) {
+  return(sub("https?://t.co/[a-zA-Z0-9/-/.]{1-10}\\S+", '', string))
+}
+
 
 
 
